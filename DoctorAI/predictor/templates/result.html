@@ -1,0 +1,13 @@
+<h2>Predicted Diseases</h2>
+<ul>
+  {% for disease in predictions %}
+    <li>{{ disease }}</li>
+  {% endfor %}
+</ul>
+
+{% if download_url %}
+  <a href="{{ download_url }}" class="btn btn-success" download>Download Result CSV</a>
+{% endif %}
+
+<br><br>
+<a href="{% url 'upload' %}">Predict Another</a>

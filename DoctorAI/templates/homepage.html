@@ -1,0 +1,203 @@
+<!-- api/templates/homepage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor AI - Diagnose Yourself</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Body and container styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background image setup */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://t3.ftcdn.net/jpg/10/74/82/26/360_F_1074822657_3jqHGXcKsAUh3p4GEYlxi3x3xx1IIEe1.jpg'); /* Replace with your actual image URL */
+            background-size: cover;
+            background-position: center;
+            filter: blur(0.01px); /* Apply blur effect */
+            z-index: -1; /* Ensure the image stays behind the content */
+        }
+
+        /* Dark overlay for text clarity */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+            z-index: -1;
+        }
+
+        /* Container for content */
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            z-index: 1;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-menu {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        h2 {
+            font-family: 'Roboto', sans-serif;
+            color: #495057;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .dropdown-toggle::after {
+            margin-left: 10px;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            color: white;
+            background-color: transparent; /* Remove gray background */
+            margin-top: 30px;
+}
+
+
+        /* Button styles */
+        .dropdown-toggle {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Background image with blur effect -->
+<div class="background-image"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+    <h2 class="text-center mb-4">
+        <span style="
+            background: linear-gradient(90deg, #20c997, #6f42c1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            font-size: 2rem;
+        ">
+            🧬 Doctor AI - Health Predictor
+        </span>
+    </h2>
+    
+    
+
+    <!-- Main form section -->
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="genomeFile" class="form-label">Upload Your Genome File</label>
+                    <input class="form-control" type="file" id="genomeFile" name="genomeFile" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="symptoms" class="form-label">Select Your Symptoms</label>
+                    <!-- Button to trigger the dropdown -->
+                    <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="symptomDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose Symptoms
+                    </button>
+                    <ul class="dropdown-menu w-100" aria-labelledby="symptomDropdown">
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="fever"> Fever</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="cough"> Cough</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="headache"> Headache</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="fatigue"> Fatigue</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="nausea"> Nausea</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="vomiting"> Vomiting</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="diarrhea"> Diarrhea</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="muscle pain"> Muscle Pain</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="joint pain"> Joint Pain</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="shortness of breath"> Shortness of Breath</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="chest pain"> Chest Pain</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="rash"> Skin Rash</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="sore throat"> Sore Throat</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="dizziness"> Dizziness</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="loss of smell"> Loss of Smell</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="loss of taste"> Loss of Taste</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="abdominal pain"> Abdominal Pain</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="constipation"> Constipation</li>
+                        <li><input class="dropdown-item" type="checkbox" name="symptoms" value="bloating"> Bloating</li>
+                    </ul>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">Get Prediction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if prediction %}
+    <div class="card mt-4">
+        <div class="card-body">
+            <h3>Prediction Result:</h3>
+            <p>{{ prediction }}</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>Project By Rutuja Udmale | DOT SPPU AI | © 2025</p>
+</div>
+
+<!-- Bootstrap JS (required for dropdown functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

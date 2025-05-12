@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoctorAI - Disease Prediction</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">DoctorAI - Disease Prediction</h1>
+        <p class="text-center">Upload a CSV file to predict the disease</p>
+
+        <!-- Form to upload CSV file -->
+        <form action="{% url 'result' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="file">Choose a CSV File</label>
+                <input type="file" name="file" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+
+        <!-- Displaying the result if prediction is available -->
+        {% if result %}
+        <div class="alert alert-info mt-5">
+            <h4 class="alert-heading">Prediction Result:</h4>
+            <p><strong>Predicted Disease:</strong> {{ result }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS (Optional for interactions, if needed) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
