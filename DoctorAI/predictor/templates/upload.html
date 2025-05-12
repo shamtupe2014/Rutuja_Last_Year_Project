@@ -1,38 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DoctorAI - Disease Prediction</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DoctorAI - Disease Prediction</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Outfit', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .top-caption {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      font-size: 1.2rem;
+      color: #0c4b33;
+      font-weight: 700;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 4px 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 11;
+    }
+
+    .frosted-card {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(18px);
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      color: #333;
+      max-width: 520px;
+      margin: 100px auto;
+      z-index: 10;
+      position: relative;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 100px;
+      height: auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #1d3557;
+    }
+
+    .form-control::file-selector-button {
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .alert-info {
+      background-color: rgba(0, 123, 255, 0.1);
+      color: #004085;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center">DoctorAI - Disease Prediction</h1>
-        <p class="text-center">Upload a CSV file to predict the disease</p>
 
-        <!-- Form to upload CSV file -->
-        <form action="{% url 'result' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="file">Choose a CSV File</label>
-                <input type="file" name="file" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
-        </form>
+  <!-- Overlay & Caption -->
+  <div class="bg-overlay"></div>
+  <div class="top-caption">Project by Rutuja Udmale | SPPU @2025</div>
 
-        <!-- Displaying the result if prediction is available -->
-        {% if result %}
-        <div class="alert alert-info mt-5">
-            <h4 class="alert-heading">Prediction Result:</h4>
-            <p><strong>Predicted Disease:</strong> {{ result }}</p>
-        </div>
-        {% endif %}
+  <!-- Frosted Glass Form Container -->
+  <div class="frosted-card">
+    <!-- Logo -->
+    <img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="DoctorAI Logo" class="logo">
+    <h1>DoctorAI - Disease Predictor</h1>
+
+    <p class="text-center mb-4">Upload a CSV file with symptoms to get a prediction.</p>
+
+    <form action="{% url 'result' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="file" class="form-label fw-semibold">Choose a CSV File</label>
+        <input type="file" name="file" id="file" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">🚀 Predict Disease</button>
+    </form>
+
+    {% if result %}
+    <div class="alert alert-info mt-4">
+      <h5 class="alert-heading">Prediction Result:</h5>
+      <p><strong>Predicted Disease:</strong> {{ result }}</p>
     </div>
+    {% endif %}
+  </div>
 
-    <!-- Bootstrap JS (Optional for interactions, if needed) -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
