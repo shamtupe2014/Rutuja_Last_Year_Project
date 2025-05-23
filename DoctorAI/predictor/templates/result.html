@@ -107,6 +107,15 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       z-index: 11;
     }
+
+    /* Added styling for hospital list header */
+    .hospitals-header {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1d3557;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -122,6 +131,16 @@
         <li>{{ disease }}</li>
       {% endfor %}
     </ul>
+
+    <!-- New hospital list section -->
+    {% if top_hospitals %}
+      <h3 class="hospitals-header">Top Hospitals Near You</h3>
+      <ul>
+        {% for hospital in top_hospitals %}
+          <li>{{ hospital }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
     {% if download_url %}
       <a href="{{ download_url }}" class="btn btn-success" download>Download Result CSV</a>

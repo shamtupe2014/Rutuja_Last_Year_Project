@@ -114,10 +114,14 @@
 
     <form action="{% url 'result' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
+
+      <!-- Removed PIN Code input here -->
+
       <div class="mb-3">
         <label for="file" class="form-label fw-semibold">Choose a CSV File</label>
         <input type="file" name="file" id="file" class="form-control" required>
       </div>
+
       <button type="submit" class="btn btn-primary w-100">🚀 Predict Disease</button>
     </form>
 

@@ -50,7 +50,7 @@ print("✅ Model and label encoder saved successfully.")
 
 def predict_disease(input_csv):
     # Load saved model and label encoder
-    with open(os.path.join(model_dir, 'model.pkl'), 'rb') as f:
+    with open(os.path.join(model_dir, 'ls'), 'rb') as f:
         loaded_model = pickle.load(f)
     with open(os.path.join(model_dir, 'label_encoder.pkl'), 'rb') as f:
         loaded_le = pickle.load(f)
